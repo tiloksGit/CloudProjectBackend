@@ -26,9 +26,50 @@ const addNotes = async(item) => {
         Item: item
     }
     const value = await dynamoClient.put(params).promise();
-    console.log(value);
+    return value;
+}
+
+const updateNotes = async(noteId) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key : {
+            noteId
+        }
+    }
+    const value = await dynamoClient.update(params).promise();
+    return value;
+}
+
+const deleteNotes = async(noteId) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: {
+            noteId : noteId
+        }
+    }
+    const value = await dynamoClient.scan(params).promise();
+    return value;
+}
+
+const getnotesById = async(uId) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key : {uId}
+    }
+    const value = await dynamoClient.scan(params).promise();
+    return value;
+}
+
+const getNotebyId = async(noteId) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: {
+            noteId
+        }
+    }
+    const value = await dynamoClient.scan(params).promise();
     return value;
 }
 
 
-module.exports = {addNotes, getnotes}
+module.exports = {addNotes, getnotes, updateNotes, deleteNotes, getNotebyId, getnotesById}

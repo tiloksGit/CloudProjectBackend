@@ -7,7 +7,6 @@ const PORT = 3000;
 app.use(cors(corsOptions));
 app.use(express.json())
 
-app.use('/', (req, res) => {
-    return res.send('hello from notes backend')
-})
+app.get('/', (req,res) => res.send("hello"))
+app.use('/notes', require('./Routes/notes'))
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
